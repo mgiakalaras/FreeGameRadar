@@ -1,0 +1,13 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Game cover missing placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540"><stop stop-color="#120F1E"/><stop offset=".46" stop-color="#2A1430"/><stop offset="1" stop-color="#09070E"/></linearGradient>
+    <linearGradient id="g" x1="112" y1="68" x2="836" y2="454"><stop stop-color="#FFD14D"/><stop offset=".52" stop-color="#FF3F8F"/><stop offset="1" stop-color="#3FE7FF"/></linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="28" fill="url(#bg)"/>
+  <path d="M0 420C164 346 268 322 404 346C565 374 690 451 960 350V540H0V420Z" fill="#08070D" opacity=".78"/>
+  <path d="M250 123H648L710 185V418H312L250 356V123Z" stroke="url(#g)" stroke-width="12" fill="#120F1E"/>
+  <path d="M382 270H578M480 172V368" stroke="#FFF7EA" stroke-width="28" stroke-linecap="square"/>
+  <circle cx="594" cy="203" r="22" fill="#FFD14D"/>
+  <circle cx="628" cy="272" r="22" fill="#3FE7FF"/>
+  <text x="306" y="472" fill="#FFF7EA" font-family="Arial Black, Impact, sans-serif" font-size="46" letter-spacing="-2">NO COVER FROM SOURCE</text>
+</svg>

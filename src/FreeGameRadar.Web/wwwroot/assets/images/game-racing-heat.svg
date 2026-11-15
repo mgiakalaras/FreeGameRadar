@@ -1,0 +1,19 @@
+<svg width="560" height="720" viewBox="0 0 560 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Original racing game cover placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="720"><stop stop-color="#27101F"/><stop offset=".48" stop-color="#4E133A"/><stop offset="1" stop-color="#07070D"/></linearGradient>
+    <linearGradient id="road" x1="280" y1="265" x2="280" y2="720"><stop stop-color="#FFD14D"/><stop offset=".5" stop-color="#FF7A1A"/><stop offset="1" stop-color="#FF3F8F"/></linearGradient>
+  </defs>
+  <rect width="560" height="720" rx="36" fill="url(#bg)"/>
+  <circle cx="94" cy="98" r="96" fill="#FF7A1A" opacity=".25"/>
+  <circle cx="480" cy="148" r="138" fill="#3FE7FF" opacity=".12"/>
+  <path d="M0 478C88 420 153 389 238 377C345 362 443 391 560 470V720H0V478Z" fill="#120F1E"/>
+  <path d="M238 377L117 720H443L320 377H238Z" fill="url(#road)" opacity=".95"/>
+  <path d="M278 382L246 720M282 382L315 720" stroke="#120F1E" stroke-width="12" opacity=".55"/>
+  <path d="M152 492L232 458H328L410 492L432 573H130L152 492Z" fill="#FFF7EA"/>
+  <path d="M181 503H379L393 546H166L181 503Z" fill="#120F1E"/>
+  <circle cx="193" cy="579" r="38" fill="#09070E" stroke="#3FE7FF" stroke-width="10"/>
+  <circle cx="369" cy="579" r="38" fill="#09070E" stroke="#FFD14D" stroke-width="10"/>
+  <path d="M111 165H450" stroke="#FFF7EA" stroke-width="10" stroke-linecap="square" opacity=".9"/>
+  <text x="74" y="245" fill="#FFF7EA" font-family="Arial Black, Impact, sans-serif" font-size="70" letter-spacing="-4">RACING</text>
+  <text x="98" y="303" fill="#FFD14D" font-family="Arial Black, Impact, sans-serif" font-size="62" letter-spacing="-3">HEAT</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg width="760" height="156" viewBox="0 0 760 156" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FreeGameRadar logo</title>
+  <desc id="desc">Angular arcade style FreeGameRadar logo.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="760" y2="156" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD14D"/>
+      <stop offset="0.42" stop-color="#FF7A1A"/>
+      <stop offset="0.72" stop-color="#FF3F8F"/>
+      <stop offset="1" stop-color="#3FE7FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-6" y="-6" width="780" height="176" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="8" dy="8" stdDeviation="0" flood-color="#000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M18 23H128L148 43V133H38L18 113V23Z" fill="#120F1E" stroke="url(#g)" stroke-width="6"/>
+    <path d="M52 79H113M82 48V111" stroke="#FFF7EA" stroke-width="13" stroke-linecap="square"/>
+    <circle cx="112" cy="57" r="9" fill="#FFD14D"/>
+    <circle cx="126" cy="82" r="9" fill="#3FE7FF"/>
+    <path d="M31 31L45 45M136 119L123 106" stroke="#FF3F8F" stroke-width="5" stroke-linecap="square"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M177 18H742L756 32V124L727 153H177V18Z" fill="#120F1E" stroke="#FFF7EA" stroke-opacity="0.17" stroke-width="3"/>
+    <path d="M177 18H522L546 42H756" stroke="url(#g)" stroke-width="7"/>
+    <text x="204" y="76" fill="#FFF7EA" font-family="Arial Black, Impact, sans-serif" font-size="56" letter-spacing="-3">FREE GAME</text>
+    <text x="204" y="124" fill="url(#g)" font-family="Arial Black, Impact, sans-serif" font-size="48" letter-spacing="-2">RADAR</text>
+    <path d="M629 55C647 37 676 37 694 55C712 73 712 102 694 120C676 138 647 138 629 120C611 102 611 73 629 55Z" stroke="#3FE7FF" stroke-width="5"/>
+    <path d="M662 87H714" stroke="#69FF9D" stroke-width="5" stroke-linecap="square"/>
+    <path d="M662 87L696 63" stroke="#69FF9D" stroke-width="4" stroke-linecap="square"/>
+    <circle cx="662" cy="87" r="7" fill="#FFD14D"/>
+  </g>
+</svg>

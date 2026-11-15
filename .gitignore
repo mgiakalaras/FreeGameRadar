@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.db
+*.db-shm
+*.db-wal
+src/FreeGameRadar.Web/App_Data/*
+!src/FreeGameRadar.Web/App_Data/.gitkeep

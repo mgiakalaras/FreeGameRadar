@@ -1,0 +1,45 @@
+@page
+@model AboutModel
+@{
+    ViewData["Title"] = "About";
+}
+
+<section class="panel readable">
+    <h1>About FreeGameRadar</h1>
+    <p><strong>FreeGameRadar</strong> είναι self-hosted tracker για νόμιμα δωρεάν παιχνίδια, giveaways και σοβαρά discounted deals. Δεν κάνει login σε stores, δεν κάνει auto-claim και δεν αποθηκεύει λογαριασμούς.</p>
+
+    <h2>v0.7 UI cleanup</h2>
+    <ul>
+        <li>Το hero είναι πιο μαζεμένο, χωρίς τεράστια γράμματα που τρώνε την οθόνη.</li>
+        <li>Το πρώτο screen έχει compact radar overview και top picks αντί για άδειο status κουτί.</li>
+        <li>Το navigation καθαρίστηκε και δεν απλώνεται σαν σειρά από άσχετα κουμπιά.</li>
+        <li>Το Light/Dark και οι variations μπήκαν σε ένα dropdown “Εμφάνιση”.</li>
+        <li>Τα responsive breakpoints ξαναγράφτηκαν για desktop, tablet και κινητό.</li>
+    </ul>
+
+    <h2>Themes</h2>
+    <ul>
+        <li>Light / Dark mode.</li>
+        <li>Variations: Arcade, Cyber, Toxic, Sunset.</li>
+        <li>Οι επιλογές είναι σε dropdown και αποθηκεύονται τοπικά στο browser με localStorage.</li>
+    </ul>
+
+    <h2>Sources</h2>
+    <ul>
+        <li>GamerPower public giveaways API</li>
+        <li>CheapShark public deals API για free-to-keep και paid deals έως 25$</li>
+    </ul>
+
+    <h2>Τι σημαίνει Best Deal;</h2>
+    <p>Το Best Deal score είναι heuristic: συνδυάζει τύπο προσφοράς, αρχική αξία, έκπτωση, κριτικές Steam/Metacritic και CheapShark deal rating όπου υπάρχουν. Δεν παράγει ψεύτικες βαθμολογίες όταν η πηγή δεν δίνει review data.</p>
+
+    <h2>Roadmap</h2>
+    <ul>
+        <li>Dedicated Epic Games Store adapter</li>
+        <li>Dedicated GOG adapter</li>
+        <li>Pagination αντί για απλά “περισσότερα”</li>
+        <li>RSS feed</li>
+        <li>Telegram / Discord notifications</li>
+        <li>Wishlist keywords</li>
+    </ul>
+</section>

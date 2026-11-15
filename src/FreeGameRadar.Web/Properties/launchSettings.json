@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "FreeGameRadar.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:36610;http://localhost:36611"
+    }
+  }
+}

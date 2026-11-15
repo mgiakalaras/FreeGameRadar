@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="el" data-theme="dark" data-variant="arcade">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0e14" />
+    <title>@ViewData["Title"] - FreeGameRadar</title>
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+    <script>
+        (() => {
+            const theme = localStorage.getItem('fgr-theme') || 'dark';
+            const variant = localStorage.getItem('fgr-variant') || 'arcade';
+            document.documentElement.dataset.theme = theme;
+            document.documentElement.dataset.variant = variant;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f6f1e7' : '#0b0e14');
+        })();
+    </script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="backdrop" aria-hidden="true"></div>
+
+    <header class="app-header">
+        <a class="brand" asp-page="/Index" aria-label="FreeGameRadar home">
+            <img class="brand-mark" src="~/assets/brand/free-game-radar-mark.svg" alt="" />
+            <span>
+                <strong>FreeGameRadar</strong>
+                <small>Official giveaways tracker</small>
+            </span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+            <a asp-page="/Index" asp-fragment="free-drops">Free drops</a>
+            <a href="/#best-deals">Best Deals</a>
+            <a asp-page="/About">About</a>
+        </nav>
+
+        <details class="settings-menu">
+            <summary aria-label="Ρυθμίσεις εμφάνισης">
+                <span class="settings-dot"></span>
+                Εμφάνιση
+            </summary>
+            <div class="settings-popover">
+                <label>
+                    Theme
+                    <select data-theme-select>
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </select>
+                </label>
+                <label>
+                    Variation
+                    <select data-variant-select>
+                        <option value="arcade">Arcade</option>
+                        <option value="cyber">Cyber</option>
+                        <option value="toxic">Toxic</option>
+                        <option value="sunset">Sunset</option>
+                    </select>
+                </label>
+            </div>
+        </details>
+    </header>
+
+    <main class="page">
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer">
+        <span>FreeGameRadar v0.7.0</span>
+        <span>Official links only · no login · no fake ratings</span>
+    </footer>
+
+    <script src="~/js/theme.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

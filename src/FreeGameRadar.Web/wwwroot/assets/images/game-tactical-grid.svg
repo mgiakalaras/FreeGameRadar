@@ -1,0 +1,18 @@
+<svg width="560" height="720" viewBox="0 0 560 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Original tactical grid game cover placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="560" y2="720"><stop stop-color="#132018"/><stop offset=".55" stop-color="#19132A"/><stop offset="1" stop-color="#08070D"/></linearGradient>
+  </defs>
+  <rect width="560" height="720" rx="36" fill="url(#bg)"/>
+  <path d="M70 130H490V552H70V130Z" fill="#120F1E" stroke="#69FF9D" stroke-width="7"/>
+  <path d="M70 214H490M70 298H490M70 382H490M70 466H490M154 130V552M238 130V552M322 130V552M406 130V552" stroke="#69FF9D" stroke-opacity=".24" stroke-width="4"/>
+  <path d="M154 298H238V382H154V298Z" fill="#FFD14D"/>
+  <path d="M322 214H406V298H322V214Z" fill="#FF3F8F"/>
+  <path d="M238 382H322V466H238V382Z" fill="#3FE7FF"/>
+  <path d="M178 323L382 239" stroke="#FFF7EA" stroke-width="8" stroke-linecap="square"/>
+  <path d="M275 425L196 340" stroke="#FFF7EA" stroke-width="8" stroke-linecap="square"/>
+  <circle cx="196" cy="340" r="22" fill="#120F1E" stroke="#FFF7EA" stroke-width="8"/>
+  <circle cx="382" cy="239" r="22" fill="#120F1E" stroke="#FFF7EA" stroke-width="8"/>
+  <circle cx="275" cy="425" r="22" fill="#120F1E" stroke="#FFF7EA" stroke-width="8"/>
+  <text x="70" y="638" fill="#FFF7EA" font-family="Arial Black, Impact, sans-serif" font-size="64" letter-spacing="-4">TACTICAL</text>
+  <text x="138" y="696" fill="#69FF9D" font-family="Arial Black, Impact, sans-serif" font-size="58" letter-spacing="-3">GRID</text>
+</svg>

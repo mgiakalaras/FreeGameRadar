@@ -1,0 +1,17 @@
+services:
+  freegameradar:
+    build: .
+    container_name: freegameradar
+    restart: unless-stopped
+    ports:
+      - "8088:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      FreeGameRadar__DatabasePath: /app/App_Data/freegameradar.db
+      FreeGameRadar__RefreshIntervalMinutes: 240
+      FreeGameRadar__InitialRefreshOnStartup: "true"
+    volumes:
+      - freegameradar_data:/app/App_Data
+
+volumes:
+  freegameradar_data:

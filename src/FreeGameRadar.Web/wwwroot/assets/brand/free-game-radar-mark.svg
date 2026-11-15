@@ -1,0 +1,12 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FreeGameRadar mark">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="160" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFD14D"/><stop offset=".5" stop-color="#FF3F8F"/><stop offset="1" stop-color="#3FE7FF"/>
+    </linearGradient>
+  </defs>
+  <path d="M15 18H118L144 44V143H41L15 117V18Z" fill="#120F1E" stroke="url(#g)" stroke-width="7"/>
+  <path d="M48 81H112M80 49V115" stroke="#FFF7EA" stroke-width="14" stroke-linecap="square"/>
+  <circle cx="114" cy="55" r="9" fill="#FFD14D"/>
+  <circle cx="126" cy="84" r="9" fill="#3FE7FF"/>
+  <path d="M30 33L46 49M131 126L114 109" stroke="#FF3F8F" stroke-width="5" stroke-linecap="square"/>
+</svg>

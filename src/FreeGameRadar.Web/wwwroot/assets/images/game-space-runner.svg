@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 900" role="img" aria-label="Space Runner abstract game art">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#03121F"/><stop offset=".55" stop-color="#171A4B"/><stop offset="1" stop-color="#330B3E"/></linearGradient>
+    <linearGradient id="ship" x1="190" y1="230" x2="480" y2="730" gradientUnits="userSpaceOnUse"><stop stop-color="#00E5FF"/><stop offset=".5" stop-color="#7C3AED"/><stop offset="1" stop-color="#FFB86B"/></linearGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="640" height="900" rx="42" fill="url(#bg)"/>
+  <g fill="#fff" opacity=".7"><circle cx="100" cy="160" r="4"/><circle cx="545" cy="132" r="3"/><circle cx="468" cy="250" r="5"/><circle cx="170" cy="353" r="3"/><circle cx="520" cy="490" r="4"/><circle cx="80" cy="565" r="3"/><circle cx="250" cy="94" r="3"/></g>
+  <ellipse cx="320" cy="405" rx="206" ry="206" fill="#00E5FF" opacity=".1"/>
+  <path d="M320 172 438 594 320 520 202 594 320 172Z" fill="#0B1020" stroke="url(#ship)" stroke-width="17" filter="url(#g)"/>
+  <path d="M274 660c16 50 30 84 46 120 16-36 30-70 46-120" fill="none" stroke="#FF3D9A" stroke-width="22" stroke-linecap="round" filter="url(#g)"/>
+  <text x="320" y="800" text-anchor="middle" fill="#F8FAFC" font-family="Inter, Segoe UI, Arial" font-size="46" font-weight="900">SPACE</text>
+  <text x="320" y="848" text-anchor="middle" fill="#BFE9FF" font-family="Inter, Segoe UI, Arial" font-size="28" font-weight="800" letter-spacing="6">RUNNER</text>
+</svg>

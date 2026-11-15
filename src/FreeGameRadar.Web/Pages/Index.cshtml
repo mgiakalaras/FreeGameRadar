@@ -1,0 +1,315 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Radar";
+    var now = DateTimeOffset.UtcNow;
+    var messageTone = TempData["MessageTone"] as string ?? "info";
+}
+
+<section class="lead-layout" aria-labelledby="page-title">
+    <article class="hero-panel">
+        <div class="hero-kicker">
+            <span class="pulse"></span>
+            Official giveaways tracker
+        </div>
+        <h1 id="page-title">Δωρεάν παιχνίδια & τίμια deals</h1>
+        <p class="hero-text">Χωρίς ψάξιμο σε δέκα launchers. Official claim links, φίλτρα ανά store/platform και ξεχωριστό Best Deals board με public review data όπου υπάρχουν.</p>
+
+        <div class="hero-actions">
+            <button class="primary-button" type="button" data-open-dialog="scan-dialog">Σάρωση τώρα</button>
+            <a class="soft-button" href="#free-drops">Free drops</a>
+            <a class="soft-button" href="#best-deals">Best Deals</a>
+        </div>
+
+        <div class="rules-row" aria-label="Tracking rules">
+            <span>Official links only</span>
+            <span>No auto-claim</span>
+            <span>No fake ratings</span>
+        </div>
+    </article>
+
+    <aside class="side-panel" aria-label="Radar overview">
+        <div class="side-panel-header">
+            <span>Last scan</span>
+            <strong>@(Model.Stats.LastRefresh?.ToLocalTime().ToString("dd/MM HH:mm") ?? "Δεν έχει γίνει")</strong>
+        </div>
+
+        <div class="stat-strip">
+            <article><span>Active</span><strong>@Model.Stats.ActiveOffers</strong></article>
+            <article><span>Free</span><strong>@Model.Stats.FreeToKeep</strong></article>
+            <article><span>Deals</span><strong>@Model.Stats.Deals</strong></article>
+            <article><span>Stores</span><strong>@Model.Stats.Stores</strong></article>
+        </div>
+
+        <div class="mini-picks">
+            <article>
+                <span>Best free</span>
+                <strong>@(Model.BestFreeDrop?.Title ?? "Περιμένει σάρωση")</strong>
+                <small>@(Model.BestFreeDrop is null ? "—" : "Score " + Model.BestFreeDrop.BestDealScore.ToString("0"))</small>
+            </article>
+            <article>
+                <span>Best deal</span>
+                <strong>@(Model.BestPaidDeal?.Title ?? "Περιμένει σάρωση")</strong>
+                <small>@(Model.BestPaidDeal is null ? "—" : (Model.BestPaidDeal.CurrentPrice ?? "Deal") + " · Score " + Model.BestPaidDeal.BestDealScore.ToString("0"))</small>
+            </article>
+        </div>
+    </aside>
+</section>
+
+@if (TempData["Message"] is string message)
+{
+    <section class="app-alert @messageTone" role="status" aria-live="polite">
+        <div>
+            <strong>@(messageTone == "success" ? "Έτοιμο" : "Προσοχή")</strong>
+            <p>@message</p>
+        </div>
+        <button type="button" data-dismiss-alert aria-label="Κλείσιμο μηνύματος">×</button>
+    </section>
+}
+
+<dialog class="app-dialog" id="scan-dialog" aria-labelledby="scan-dialog-title">
+    <form method="post" asp-page-handler="Refresh" class="dialog-card" data-scan-form>
+        <div class="dialog-icon">↻</div>
+        <h2 id="scan-dialog-title">Να γίνει νέα σάρωση;</h2>
+        <p>Θα ελεγχθούν GamerPower και CheapShark, θα ενημερωθεί η SQLite βάση και θα εμφανιστούν μόνο official claim/view links. Δεν γίνεται login και δεν ακουμπάμε λογαριασμούς.</p>
+        <div class="dialog-list">
+            <span>Giveaways</span>
+            <span>Free-to-keep</span>
+            <span>Paid deals</span>
+        </div>
+        <div class="dialog-actions">
+            <button class="soft-button" type="button" data-close-dialog>Άκυρο</button>
+            <button class="primary-button" type="submit">Ξεκίνα σάρωση</button>
+        </div>
+        <p class="dialog-working" data-scan-working>Σκανάρω πηγές… κράτα λίγο.</p>
+    </form>
+</dialog>
+
+<section class="spotlight-grid" aria-label="Highlights">
+    <article class="spotlight-card free-card">
+        <p class="eyebrow">Best free drop</p>
+        @if (Model.BestFreeDrop is null)
+        {
+            <h2>Δεν υπάρχει δυνατό free drop ακόμα.</h2>
+            <p>Πάτα σάρωση για να γεμίσει το board με πραγματικά δεδομένα.</p>
+        }
+        else
+        {
+            <div class="spotlight-media">
+                <img src="@(string.IsNullOrWhiteSpace(Model.BestFreeDrop.ImageUrl) ? Url.Content("~/assets/images/cover-placeholder.svg") : Model.BestFreeDrop.ImageUrl)" alt="@Model.BestFreeDrop.Title cover" loading="lazy" />
+                <span class="score-pill">@Model.BestFreeDrop.BestDealScore.ToString("0")</span>
+            </div>
+            <h2>@Model.BestFreeDrop.Title</h2>
+            <p>@(string.IsNullOrWhiteSpace(Model.BestFreeDrop.ReviewSummary) ? "Δεν υπάρχουν public review data από την πηγή." : Model.BestFreeDrop.ReviewSummary)</p>
+            <a class="primary-button small" href="@Model.BestFreeDrop.ClaimUrl" target="_blank" rel="noopener noreferrer">Claim / View</a>
+        }
+    </article>
+
+    <article class="spotlight-card deal-card">
+        <p class="eyebrow">Best paid deal</p>
+        @if (Model.BestPaidDeal is null)
+        {
+            <h2>Δεν υπάρχει δυνατό paid deal ακόμα.</h2>
+            <p>Μετά τη σάρωση θα εμφανίζονται εδώ τα καλύτερα discounted games.</p>
+        }
+        else
+        {
+            <div class="spotlight-media">
+                <img src="@(string.IsNullOrWhiteSpace(Model.BestPaidDeal.ImageUrl) ? Url.Content("~/assets/images/cover-placeholder.svg") : Model.BestPaidDeal.ImageUrl)" alt="@Model.BestPaidDeal.Title cover" loading="lazy" />
+                <span class="score-pill">@Model.BestPaidDeal.BestDealScore.ToString("0")</span>
+            </div>
+            <h2>@Model.BestPaidDeal.Title</h2>
+            <p>@(string.IsNullOrWhiteSpace(Model.BestPaidDeal.ReviewSummary) ? "Δεν υπάρχουν public review data από την πηγή." : Model.BestPaidDeal.ReviewSummary)</p>
+            <a class="primary-button small" href="@Model.BestPaidDeal.ClaimUrl" target="_blank" rel="noopener noreferrer">View deal</a>
+        }
+    </article>
+</section>
+
+<section class="filter-panel" aria-label="Filters">
+    <div class="filter-title">
+        <p class="eyebrow">Filters</p>
+        <h2>Βρες παιχνίδι, όχι θόρυβο.</h2>
+        @if (Model.HasFilters)
+        {
+            <a asp-page="/Index" class="reset-link">Καθάρισμα φίλτρων</a>
+        }
+    </div>
+
+    <form class="filters" method="get">
+        <label>
+            Store
+            <select asp-for="Store">
+                <option value="">Όλα τα stores</option>
+                @foreach (var store in Model.Stores)
+                {
+                    <option value="@store">@store</option>
+                }
+            </select>
+        </label>
+        <label>
+            Platform
+            <select asp-for="Platform">
+                <option value="">Όλες οι πλατφόρμες</option>
+                @foreach (var platform in Model.Platforms)
+                {
+                    <option value="@platform">@platform</option>
+                }
+            </select>
+        </label>
+        <label>
+            Τύπος
+            <select asp-for="OfferType">
+                <option value="">Όλοι οι τύποι</option>
+                @foreach (var type in Model.FreeOfferTypes)
+                {
+                    <option value="@type">@type</option>
+                }
+            </select>
+        </label>
+        <label>
+            Ταξινόμηση
+            <select asp-for="Sort">
+                <option value="ending">Λήγουν πρώτα</option>
+                <option value="best">Best score πρώτα</option>
+                <option value="newest">Νεότερα</option>
+                <option value="store">Ανά κατάστημα</option>
+            </select>
+        </label>
+        <label class="search-field">
+            Αναζήτηση
+            <input asp-for="Q" placeholder="RPG, Epic, Steam, strategy…" />
+        </label>
+        <div class="filter-checks">
+            <label><input asp-for="BestDealsOnly" /> Μόνο δυνατά</label>
+            <label><input asp-for="ExpiringSoon" /> Λήγουν σύντομα</label>
+            <label><input asp-for="ShowExpired" /> Και παλιά</label>
+        </div>
+        <button class="primary-button small" type="submit">Εφαρμογή</button>
+    </form>
+</section>
+
+<section class="quick-dock" aria-label="Quick filters">
+    <div>
+        <strong>Stores</strong>
+        @foreach (var store in Model.Stores.Take(8))
+        {
+            <a asp-page="/Index" asp-route-store="@store" asp-route-sort="best">@store</a>
+        }
+    </div>
+    <div>
+        <strong>Platforms</strong>
+        @foreach (var platform in Model.Platforms.Take(8))
+        {
+            <a asp-page="/Index" asp-route-platform="@platform" asp-route-sort="best">@platform</a>
+        }
+    </div>
+</section>
+
+<section id="free-drops" class="section-panel" aria-label="Free drops">
+    <header class="section-head">
+        <div>
+            <p class="eyebrow">Free drops</p>
+            <h2>Δωρεάν / giveaways / trials / DLC</h2>
+            <p>Προβολή @(Model.FreeOffers.Count) offers. Τα υπόλοιπα ανοίγουν χειροκίνητα για να μη γίνεται η σελίδα κατάλογος τηλεφώνου.</p>
+        </div>
+        @if (!Model.ShowAllFree)
+        {
+            <a class="soft-button" asp-page="/Index" asp-route-store="@Model.Store" asp-route-platform="@Model.Platform" asp-route-offerType="@Model.OfferType" asp-route-sort="@Model.Sort" asp-route-q="@Model.Q" asp-route-showExpired="@Model.ShowExpired" asp-route-expiringSoon="@Model.ExpiringSoon" asp-route-bestDealsOnly="@Model.BestDealsOnly" asp-route-showAllFree="true" asp-fragment="free-drops">Περισσότερα free drops</a>
+        }
+    </header>
+
+    @if (!Model.FreeOffers.Any())
+    {
+        <article class="empty-state">
+            <h2>Δεν υπάρχουν free drops με αυτά τα φίλτρα.</h2>
+            <p>Δοκίμασε καθάρισμα φίλτρων ή νέα σάρωση. Αν η πηγή δεν δίνει δεδομένα, δεν εμφανίζουμε ψεύτικες εγγραφές για να γεμίσει η σελίδα.</p>
+            <button class="primary-button small" type="button" data-open-dialog="scan-dialog">Σάρωση τώρα</button>
+        </article>
+    }
+    else
+    {
+        <div class="cards-grid">
+            @foreach (var offer in Model.FreeOffers)
+            {
+                var expired = offer.IsExpired(now);
+                var soon = offer.ExpiresSoon(now);
+                <article class="offer-card @(expired ? "expired" : string.Empty)">
+                    <a class="cover-link" href="@offer.ClaimUrl" target="_blank" rel="noopener noreferrer" aria-label="Open @offer.Title offer">
+                        <img src="@(string.IsNullOrWhiteSpace(offer.ImageUrl) ? Url.Content("~/assets/images/cover-placeholder.svg") : offer.ImageUrl)" alt="@offer.Title cover" loading="lazy" />
+                        <span class="type-badge @(soon ? "urgent" : expired ? "muted" : string.Empty)">@(soon ? "Λήγει σύντομα" : expired ? "Expired" : offer.OfferType)</span>
+                        <span class="score-pill compact">@offer.BestDealScore.ToString("0")</span>
+                    </a>
+                    <div class="card-body">
+                        <div class="meta-line"><span>@offer.Store</span><span>@offer.SourceName</span></div>
+                        <h3>@offer.Title</h3>
+                        <p class="card-desc">@(string.IsNullOrWhiteSpace(offer.Description) ? "Η πηγή δεν έδωσε περιγραφή." : offer.Description)</p>
+                        <dl class="info-grid">
+                            <div><dt>Τιμή</dt><dd>@(offer.CurrentPrice ?? "Free")</dd></div>
+                            <div><dt>Λήγει</dt><dd>@offer.EndDateLabel</dd></div>
+                            <div><dt>Platform</dt><dd>@(string.IsNullOrWhiteSpace(offer.Platforms) ? "—" : offer.Platforms)</dd></div>
+                            <div><dt>Quality</dt><dd>@offer.QualityLabel</dd></div>
+                        </dl>
+                        @if (!string.IsNullOrWhiteSpace(offer.ReviewSummary))
+                        {
+                            <p class="review-note">@offer.ReviewSummary</p>
+                        }
+                    </div>
+                    <div class="card-actions">
+                        <a class="primary-button small" href="@offer.ClaimUrl" target="_blank" rel="noopener noreferrer">Claim / View</a>
+                        @if (!string.IsNullOrWhiteSpace(offer.SourceUrl))
+                        {
+                            <a class="soft-button small" href="@offer.SourceUrl" target="_blank" rel="noopener noreferrer">Source</a>
+                        }
+                    </div>
+                </article>
+            }
+        </div>
+    }
+</section>
+
+<section id="best-deals" class="section-panel deal-panel" aria-label="Best paid deals">
+    <header class="section-head">
+        <div>
+            <p class="eyebrow">Best Deals</p>
+            <h2>Πληρωμένα deals που αξίζουν ξεχωριστό ράφι</h2>
+            <p>Δεν μπαίνουν στο free wall. Είναι άλλη ενότητα, με άλλο νόημα και πιο αυστηρό score.</p>
+        </div>
+        @if (!Model.ShowAllDeals)
+        {
+            <a class="soft-button" asp-page="/Index" asp-route-store="@Model.Store" asp-route-platform="@Model.Platform" asp-route-sort="best" asp-route-q="@Model.Q" asp-route-showExpired="@Model.ShowExpired" asp-route-showAllDeals="true" asp-fragment="best-deals">Περισσότερα deals</a>
+        }
+    </header>
+
+    @if (!Model.DealOffers.Any())
+    {
+        <article class="empty-state">
+            <h2>Δεν βρέθηκαν Best Deals ακόμα.</h2>
+            <p>Πάτα σάρωση. Το CheapShark φέρνει discounted PC deals και το app κρατάει τα καλύτερα σύμφωνα με price/review/deal score.</p>
+            <button class="primary-button small" type="button" data-open-dialog="scan-dialog">Σάρωση τώρα</button>
+        </article>
+    }
+    else
+    {
+        <div class="deal-list">
+            @foreach (var deal in Model.DealOffers)
+            {
+                <article class="deal-row">
+                    <a class="deal-thumb" href="@deal.ClaimUrl" target="_blank" rel="noopener noreferrer">
+                        <img src="@(string.IsNullOrWhiteSpace(deal.ImageUrl) ? Url.Content("~/assets/images/cover-placeholder.svg") : deal.ImageUrl)" alt="@deal.Title cover" loading="lazy" />
+                    </a>
+                    <div class="deal-main">
+                        <div class="meta-line"><span>@deal.Store</span><span>@(deal.DiscountPercent.HasValue ? deal.DiscountPercent.Value.ToString("0") + "% off" : "Deal")</span></div>
+                        <h3>@deal.Title</h3>
+                        <p>@(string.IsNullOrWhiteSpace(deal.ReviewSummary) ? "Δεν υπάρχουν public review data από την πηγή." : deal.ReviewSummary)</p>
+                    </div>
+                    <div class="price-box">
+                        <span>Score @deal.BestDealScore.ToString("0")</span>
+                        <strong>@(deal.CurrentPrice ?? "—")</strong>
+                        <small>@(deal.OriginalPrice ?? "")</small>
+                    </div>
+                    <a class="primary-button small" href="@deal.ClaimUrl" target="_blank" rel="noopener noreferrer">View deal</a>
+                </article>
+            }
+        </div>
+    }
+</section>
